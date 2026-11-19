@@ -644,9 +644,6 @@ table.dv-price tr.supp td { font-style:italic; color:#544c3d; }
               <div>
                 <label for="dv-voyage">Voyage</label>
                 <select id="dv-voyage">
-                  <option value="OCT26|Octobre 2026">Octobre 2026</option>
-                  <option value="DEC26|Décembre 2026">Décembre 2026</option>
-                  <option value="CHA27|Chaabane 2027">Chaabane 2027</option>
                   <option value="RAM27|Ramadan 2027">Ramadan 2027</option>
                   <option value="PERSO|Omra personnalisée">Omra personnalisée</option>
                 </select>
@@ -1038,28 +1035,7 @@ table.dv-price tr.supp td { font-style:italic; color:#544c3d; }
         <div class="conf-section-title">Sélectionnez le planning à charger</div>
         <div class="conf-voyages-list">
           <label class="conf-voyage-item selected" onclick="dvSelectConfVoyage(this)">
-            <input type="radio" name="conf-voyage" class="conf-voyage-radio" value="oct26" checked>
-            <div>
-              <div class="conf-voyage-name">🍂 Octobre 2026</div>
-              <div class="conf-voyage-sub">Omra confort octobre 2026 / omra Eco octobre 2026</div>
-            </div>
-          </label>
-          <label class="conf-voyage-item" onclick="dvSelectConfVoyage(this)">
-            <input type="radio" name="conf-voyage" class="conf-voyage-radio" value="dec26">
-            <div>
-              <div class="conf-voyage-name">❄️ Décembre 2026</div>
-              <div class="conf-voyage-sub">Omra Confort decembre 2026 / Omra Eco decembre 2026</div>
-            </div>
-          </label>
-          <label class="conf-voyage-item" onclick="dvSelectConfVoyage(this)">
-            <input type="radio" name="conf-voyage" class="conf-voyage-radio" value="sha27">
-            <div>
-              <div class="conf-voyage-name">🌙 Chaabane 2027</div>
-              <div class="conf-voyage-sub">Omra Confort Chaabane 2027 / Omra Eco Chaabane 2027</div>
-            </div>
-          </label>
-          <label class="conf-voyage-item" onclick="dvSelectConfVoyage(this)">
-            <input type="radio" name="conf-voyage" class="conf-voyage-radio" value="ram27">
+            <input type="radio" name="conf-voyage" class="conf-voyage-radio" value="ram27" checked>
             <div>
               <div class="conf-voyage-name">⭐ Ramadan 2027</div>
               <div class="conf-voyage-sub">Omra Confort Ramadan 2027 / Omra Eco Ramadan 2027</div>
@@ -1099,17 +1075,11 @@ function dvToggle(id){
 /* ════ 1. DASHBOARD ════ */
 const API="https://script.google.com/macros/s/AKfycbzs7fJffQ7j66HZFfFn0qGM7Dey8p376Eeokb9gepzSrsT-oH0VCwN6d1EHQnplDCbEVg/exec";
 const PLANNING={
-  oct26:{id:"1L-SlQO_gKvd5Urt3QA51-zSjQIMsdGEvceh4ge-RDeA",c:"Omra confort octobre 2026",e:"omra Eco octobre 2026"},
-  dec26:{id:"1N5zXTIq44_r_ORmH2lZpn7O528-4Dwi5fDjoIkc_eZg",c:"Omra Confort decembre 2026",e:"Omra Eco decembre 2026"},
-  sha27:{id:"17z6AtIee59vYWU9BVWIww2xq1QqZbulxJZbyrUEapb4",c:"Omra Confort Chaabane 2027",e:"Omra Eco Chaabane 2027"},
   ram27:{id:"1n8bcvZnD1933k2RsYUh9f5MkSfosxdikISYO_-HcI0M",c:"Omra Confort Ramadan 2027",e:"Omra Eco Ramadan 2027"}
 };
 const SCRIPT_PRE="https://script.google.com/macros/s/AKfycbweUWXKYozNVwkajFkwASL_oNPnflvpDQS8xrTKYzORqcaHG0LLu-wNgk9J2XZKrV58/exec";
 const SCRIPT_PAI="https://script.google.com/macros/s/AKfycbwqbxXlMCEo0W0cdAz6kmUy5tEBnMFQ9uqFNwVDb4IYD745LX0qeRIy0Fl3DbbwFnskqQ/exec";
 const VOYAGES_CFG=[
-  {key:"oct26",name:"Omra Octobre 2026",sub:"Vacances · du 20 au 30 oct",ico:"🍂",bg:"#E1F5EE",pill:"Ouvert",pc:"#0F6E56",pbg:"#E1F5EE"},
-  {key:"dec26",name:"Omra Décembre 2026",sub:"Vacances d'Hiver · Prix plus élevés",ico:"❄️",bg:"#E6F1FB",pill:"Ouvert",pc:"#185FA5",pbg:"#E6F1FB"},
-  {key:"sha27",name:"Omra Chaabane 2027",sub:"Chaabane 1448 · Avant Ramadan",ico:"🌙",bg:"#FAEEDA",pill:"À venir",pc:"#854F0B",pbg:"#FAEEDA"},
   {key:"ram27",name:"Omra Ramadan 2027",sub:"Ramadan 1448 · Très demandé",ico:"⭐",bg:"#EEEDFE",pill:"Prochainement",pc:"#534AB7",pbg:"#EEEDFE"}
 ];
 let S={key:null,name:null},detailCache={};
@@ -1174,7 +1144,7 @@ const DV_HOTELS_MEDINE = [
   {name:"Autre / Personnalisé",stars:0,distance:0,walking:0,transport:"walking",shuttle:false,shuttle24:false,custom:true},
 ];
 /* ════ 3. CONFIG ════ */
-const DV_VOYAGES=[{code:'OCT26',label:'Octobre 2026'},{code:'DEC26',label:'Décembre 2026'},{code:'CHA27',label:'Chaabane 2027'},{code:'RAM27',label:'Ramadan 2027'},{code:'PERSO',label:'Omra personnalisée'}];
+const DV_VOYAGES=[{code:'RAM27',label:'Ramadan 2027'},{code:'PERSO',label:'Omra personnalisée'}];
 const DV_FORMULES=['Confort','Éco'];
 const DV_STORAGE='safaomra_devis_config_v1';
 const DV_SAVED_API = "https://script.google.com/macros/s/AKfycbyJkMMlMTlIgYqsasRNal5Id1CrXe04uUfGw1Y55UyF3HXkLBucRAGeIm5AHlx5eCho/exec";
@@ -1756,9 +1726,6 @@ document.getElementById('dv-modal-tarifs').addEventListener('click',e=>{if(e.tar
 /* ════ CONFIRMATION DEVIS → FORMULAIRE APPS SCRIPT ════ */
 const DV_CONF_URL = 'https://script.google.com/macros/s/AKfycbzHWN15wIQaygB7UlIRSjvnlJxlSf1VU0LS0tv6tCHchX6BJuFsfsVarcLQOEasBQexug/exec';
 const DV_CONF_PLANNINGS = {
-  oct26: { id:'1L-SlQO_gKvd5Urt3QA51-zSjQIMsdGEvceh4ge-RDeA', confort:'Omra%20confort%20octobre%202026', eco:'omra%20Eco%20octobre%202026' },
-  dec26: { id:'1N5zXTIq44_r_ORmH2lZpn7O528-4Dwi5fDjoIkc_eZg', confort:'Omra%20Confort%20decembre%202026', eco:'Omra%20Eco%20decembre%202026' },
-  sha27: { id:'17z6AtIee59vYWU9BVWIww2xq1QqZbulxJZbyrUEapb4', confort:'Omra%20Confort%20Chaabane%202027', eco:'Omra%20Eco%20Chaabane%202027' },
   ram27: { id:'1n8bcvZnD1933k2RsYUh9f5MkSfosxdikISYO_-HcI0M', confort:'Omra%20Confort%20Ramadan%202027', eco:'Omra%20Eco%20Ramadan%202027' }
 };
 
@@ -1833,8 +1800,8 @@ function dvOuvrirModalConfirmation() {
     '<span class="conf-badge ' + badgeClass + '">Formule ' + formule + '</span>';
 
   // Auto-sélection voyage
-  const codeMap = { 'OCT26':'oct26', 'DEC26':'dec26', 'CHA27':'sha27', 'RAM27':'ram27' };
-  const autoKey = codeMap[code] || 'oct26';
+  const codeMap = { 'RAM27':'ram27' };
+  const autoKey = codeMap[code] || 'ram27';
   document.querySelectorAll('input[name="conf-voyage"]').forEach(r => {
     r.checked = (r.value === autoKey);
     const item = r.closest('.conf-voyage-item');
