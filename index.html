@@ -1322,34 +1322,52 @@ document.getElementById('dv-chambres-list').addEventListener('click',function(e)
   }
 
   // ── Enregistrer hôtel personnalisé (inchangé) ──
-  const saveVille=e.target.getAttribute('data-save-ville');
-  if(saveVille!==null){
-    const idx=Number(e.target.getAttribute('data-ci'));
-    const c=dvChambres[idx];
-    const nomField=saveVille==='Mekkah'?'customMekkahName':'customMedineName';
-    const distField=saveVille==='Mekkah'?'customMekkahDist':'customMedineDist';
-    const nom=(c[nomField]||''). trim();
-    const dist=(c[distField]||'').trim();
-    if(!nom){alert('Entrez d\'abord le nom de l\'hôtel.');return;}
-    const liste=saveVille==='Mekkah'?DV_HOTELS_MEKKAH:DV_HOTELS_MEDINE;
-    if(liste.find(h=>h.name===nom&&!h.custom)){alert('Cet hôtel existe déjà dans la liste.');return;}
-    const newEntry='{name:"'+nom.replace(/"/g,'\\"')+ '",stars:0,distance:0,dist:"'+dist.replace(/"/g,'\\\"')+'",walking:0,transport:"walking",shuttle:false,shuttle24:false}';
-    const btn=e.target; btn.textContent='⏳';
-    fetch(location.href).then(r=>r.text()).then(html=>{
-      const varName=saveVille==='Mekkah'?'DV_HOTELS_MEKKAH':'DV_HOTELS_MEDINE';
-      const blockStart=html.indexOf('const '+varName+'=[');
-      const blockEnd=html.indexOf('];',blockStart);
-      const block=html.slice(blockStart,blockEnd);
-      const markerInBlock=block.lastIndexOf('{name:"Autre / Personnalisé"');
-      if(markerInBlock===-1){alert('Impossible de localiser le point d\'insertion.');btn.textContent='💾';return;}
-      const insertPos=blockStart+markerInBlock;
-      const newHtml=html.slice(0,insertPos)+newEntry+',\n  '+html.slice(insertPos);
-      const blob=new Blob([newHtml],{type:'text/html'});
-      const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='safa-omra-updated.html';a.click();
-      btn.textContent='✅';setTimeout(()=>{btn.textContent='💾';},3000);
-    }).catch(()=>{alert('Erreur réseau.');btn.textContent='💾';});
-  }
-});
+  // Remplacer le bloc "const saveVille = ..." par :
+const saveVille = e.target.getAttribute('data-save-ville');
+if (saveVille !== null) {
+  const idx = Number(e.target.getAttribute('data-ci'));
+  const c = dvChambres[idx];
+  const nomField = saveVille === 'Mekkah' ? 'customMekkahName' : 'customMedineName';
+  const distField = saveVille === 'Mekkah' ? 'customMekkahDist' : 'customMedineDist';
+  const nom  = (c[nomField]  || '').trim();
+  const dist = (c[distField] || '').trim();
+  if (!nom) { alert("Entrez d'abord le nom de l'hôtel."); return; }
+  
+  const btn = e.target;
+  btn.textContent = '⏳';
+  
+  jsonpUrl(DV_SAVED_API, 
+    'action=save_hotel&ville=' + encodeURIComponent(saveVille) +
+    '&name=' + encodeURIComponent(nom) +
+    '&dist=' + encodeURIComponent(dist))
+  .then(res => {
+    if (res && res.ok) {
+      // Ajouter l'hôtel dans la liste locale (avant "Autre / Personnalisé")
+      const liste = saveVille === 'Mekkah' ? DV_HOTELS_MEKKAH : DV_HOTELS_MEDINE;
+      const insertIdx = liste.findIndex(h => h.custom);
+      const newEntry = { name: nom, stars: 0, distance: null, 
+                         dist: dist, walking: 0, transport: 'walking',
+                         shuttle: false, shuttle24: false };
+      if (insertIdx >= 0) liste.splice(insertIdx, 0, newEntry);
+      else liste.push(newEntry);
+      // Sélectionner automatiquement ce nouvel hôtel
+      if (saveVille === 'Mekkah') c.hotelMekkah = nom;
+      else c.hotelMedine = nom;
+      btn.textContent = '✅';
+      dvRenderChambresForm();
+      dvRender();
+      setTimeout(() => { btn.textContent = '💾'; }, 2000);
+    } else {
+      btn.textContent = '❌'; 
+      setTimeout(() => { btn.textContent = '💾'; }, 2000);
+    }
+  })
+  .catch(() => { 
+    btn.textContent = '❌ Erreur réseau';
+    setTimeout(() => { btn.textContent = '💾'; }, 2000);
+  });
+}
+
 document.getElementById('dv-btn-add-chambre').addEventListener('click',function(){
  dvChambres.push({type:'Triple',qty:1,places:1,extras:[],hotelMekkah:'',hotelMedine:'',customMekkahName:'',customMekkahDist:'',customMedineName:'',customMedineDist:''});
   dvRenderChambresForm();dvRender();
