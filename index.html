@@ -2029,6 +2029,23 @@ function dvInit() {
   try { dvRenderChambresForm(); } catch(e) { console.error('chambres', e); }
   try { dvAppliquerTarifs(); } catch(e) { console.error('tarifs', e); }
   try { dvRender(); } catch(e) { console.error('render', e); }
+
+  try {
+    jsonpUrl(DV_SAVED_API, 'action=list_hotels').then(res => {
+      if (!res || !res.ok) return;
+      res.hotels.forEach(h => {
+        const liste = h.ville === 'Mekkah' ? DV_HOTELS_MEKKAH : DV_HOTELS_MEDINE;
+        if (!liste.find(x => x.name === h.name)) {
+          const insertIdx = liste.findIndex(x => x.custom);
+          const entry = { name: h.name, stars: 0, distance: null, dist: h.dist, walking: 0, transport: 'walking', shuttle: false, shuttle24: false };
+          if (insertIdx >= 0) liste.splice(insertIdx, 0, entry);
+          else liste.push(entry);
+        }
+      });
+      dvRenderChambresForm();
+    }).catch(() => {});
+  } catch(e) {}
+  
   try {
     jsonp("api=stats")
       .then(function(stats){ renderVoyages(stats); })
