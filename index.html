@@ -81,7 +81,7 @@ body { font-family:'Inter',sans-serif; background:var(--bg); color:var(--txt); m
 .stat-cell .lbl { font-size:10px; color:var(--txt3); margin-top:1px; }
 .val-vert { color:var(--vert); } .val-or { color:var(--or-m); }
 
-.btn-action { display:flex; align-items:center; gap:14px; padding:17px 16px; background:var(--surface); border:1px solid var(--border); border-radius:var(--r); cursor:pointer; text-decoration:none; width:100%; text-align:left; margin-bottom:8px; transition:box-shadow .15s; }
+.btn-action { display:flex; align-items:center; gap:14px; padding:17px 16px; background:var(--surface); border:1px solid var(--border); border-radius:var(--r); cursor:pointer; text-dration:none; width:100%; text-align:left; margin-bottom:8px; transition:box-shadow .15s; }
 .btn-action:hover { box-shadow:0 3px 12px rgba(0,0,0,.08); }
 .a-ico  { width:42px; height:42px; border-radius:10px; display:flex; align-items:center; justify-content:center; font-size:20px; flex-shrink:0; }
 .a-name { font-size:14px; font-weight:600; }
@@ -124,7 +124,7 @@ body { font-family:'Inter',sans-serif; background:var(--bg); color:var(--txt); m
 .money-val { font-size:14px; font-weight:700; }
 .money-lbl { font-size:8px; color:var(--txt3); text-transform:uppercase; letter-spacing:.4px; margin-top:2px; }
 .info-bar { margin-top:20px; background:var(--surface); border:1px solid var(--border); border-radius:var(--rs); padding:10px 14px; font-size:12px; color:var(--txt2); }
-.info-bar a { color:var(--vert); text-decoration:none; font-weight:500; }
+.info-bar a { color:var(--vert); text-dration:none; font-weight:500; }
 .mini-spin { display:inline-block; width:13px; height:13px; border:2px solid var(--border); border-top-color:var(--vert); border-radius:50%; animation:spin .7s linear infinite; vertical-align:-2px; }
 .empty { text-align:center; padding:34px; color:var(--txt3); font-size:13px; background:var(--surface); border:1px solid var(--border); border-radius:14px; }
 @keyframes spin { to{transform:rotate(360deg)} }
@@ -326,12 +326,15 @@ body { font-family:'Inter',sans-serif; background:var(--bg); color:var(--txt); m
 .dv-chambre-dist { font-size:10px; color:var(--emerald-deep); font-weight:600; padding:2px 0 0; }
 .dv-chambre-custom { margin-top:4px; }
 .dv-chambre-custom input { font-size:12px; padding:6px 8px; width:100%; border:1.5px solid var(--line); border-radius:7px; margin-bottom:3px; }
+.dv-btn-save-hotel { background:var(--vert-l); border:1.5px solid #b2dcc8; border-radius:7px; cursor:pointer; font-size:15px; padding:2px 7px; margin-top:2px; transition:background .15s; }
+.dv-btn-save-hotel:hover { background:#c8eed8; }
+@media print { .no-print { display:none!important; } }
 .dv-chambre-type-row { display:grid; grid-template-columns:1fr; gap:5px; margin-top:6px; }
 .dv-pack-badge { font-size:9px; background:var(--vert-l); color:var(--vert); border-radius:4px; padding:2px 6px; font-weight:700; }
 
 /* ── Actions bas ── */
 .dv-actions { display:flex; gap:8px; margin-top:4px; padding:0 0 2px; }
-.dv-btn-secondary {
+.dv-btn-sndary {
   background:#fff;
   border:1.5px solid var(--border2);
   color:#6b6355;
@@ -342,7 +345,7 @@ body { font-family:'Inter',sans-serif; background:var(--bg); color:var(--txt); m
   font-family:'Inter',sans-serif;
   transition:background .15s;
 }
-.dv-btn-secondary:hover { background:#f5f1ea; }
+.dv-btn-sndary:hover { background:#f5f1ea; }
 
 /* ── Vol ── */
 .vol-toggle-row {
@@ -514,6 +517,7 @@ table.dv-price tr.supp td { font-style:italic; color:#544c3d; }
 .conf-badge { display:inline-block; padding:2px 10px; border-radius:20px; font-size:11px; font-weight:700; }
 .conf-badge.confort { background:#E6F1FB; color:#185FA5; }
 .conf-badge.eco { background:var(--vert-l); color:var(--emerald-deep); }
+.conf-badge.rqp { background:#FFF3E0; color:#E65100; }
 .conf-badge.perso { background:#EEE8FE; color:#7B61D9; }
 .conf-recap-box { background:var(--vert-l); border:1.5px solid #b2dcc8; border-radius:10px; padding:12px 16px; margin-bottom:16px; }
 .conf-recap-total { font-family:"Fraunces",serif; font-size:24px; font-weight:700; color:var(--emerald-deep); }
@@ -653,6 +657,7 @@ table.dv-price tr.supp td { font-style:italic; color:#544c3d; }
                 <select id="dv-formule">
                   <option value="Confort">Confort</option>
                   <option value="Éco">Éco</option>
+                  <option value="Rapport qualité prix">Rapport qualité prix</option>
                 </select>
               </div>
 
@@ -1145,7 +1150,7 @@ const DV_HOTELS_MEDINE = [
 ];
 /* ════ 3. CONFIG ════ */
 const DV_VOYAGES=[{code:'RAM27',label:'Ramadan 2027'},{code:'PERSO',label:'Omra personnalisée'}];
-const DV_FORMULES=['Confort','Éco'];
+const DV_FORMULES=['Confort','Éco','Rapport qualité prix'];
 const DV_STORAGE='safaomra_devis_config_v1';
 const DV_SAVED_API = "https://script.google.com/macros/s/AKfycbyJkMMlMTlIgYqsasRNal5Id1CrXe04uUfGw1Y55UyF3HXkLBucRAGeIm5AHlx5eCho/exec";
  const DV_LOGO_KEY = 'safaomra_logo_v1';
@@ -1166,6 +1171,7 @@ const persParChambre2={Quadruple:4,Triple:3,Double:2,Individuelle:1};
 
 let dvChambres=[{type:'Quadruple',qty:1,places:1,hotelMekkah:'',hotelMedine:'',customMekkahName:'',customMekkahDist:'',customMedineName:'',customMedineDist:''}];
 let dvSupplements=[];
+let dvExclusions=[];// indices des lignes d'inclusions masquées par l'utilisateur
 
 /* ════ 4. HELPERS ════ */
 function dvFmt(n){return(Number(n)||0).toLocaleString('fr-FR',{maximumFractionDigits:0})+' €';}
@@ -1204,13 +1210,13 @@ function dvRenderChambresForm(){
           '<div class="dv-chambre-ville-label">Mekkah</div>'+
           '<select class="dv-chambre-hotel-sel" data-ci="'+i+'" data-cf="hotelMekkah">'+buildOpts(DV_HOTELS_MEKKAH,c.hotelMekkah)+'</select>'+
           (mkEntry.dist&&!mkCustom?'<div class="dv-chambre-dist">📍 '+mkEntry.dist+'</div>':'')+
-          (mkCustom?'<div class="dv-chambre-custom"><input type="text" data-ci="'+i+'" data-cf="customMekkahName" value="'+(c.customMekkahName||'')+'" placeholder="Nom de l\'hôtel"><input type="text" data-ci="'+i+'" data-cf="customMekkahDist" value="'+(c.customMekkahDist||'')+'" placeholder="Distance"></div>':'')+
+          (mkCustom?'<div class="dv-chambre-custom"><input type="text" data-ci="'+i+'" data-cf="customMekkahName" value="'+(c.customMekkahName||'')+'" placeholder="Nom de l\'hôtel"><input type="text" data-ci="'+i+'" data-cf="customMekkahDist" value="'+(c.customMekkahDist||'')+'" placeholder="Distance"><button type="button" class="dv-btn-save-hotel" data-save-ville="Mekkah" data-ci="'+i+'" title="Enregistrer cet hôtel pour la prochaine fois">💾</button></div>':'')+
         '</div>'+
         '<div class="dv-chambre-ville-col">'+
           '<div class="dv-chambre-ville-label">Médine</div>'+
           '<select class="dv-chambre-hotel-sel" data-ci="'+i+'" data-cf="hotelMedine">'+buildOpts(DV_HOTELS_MEDINE,c.hotelMedine)+'</select>'+
           (mdEntry.dist&&!mdCustom?'<div class="dv-chambre-dist">📍 '+mdEntry.dist+'</div>':'')+
-          (mdCustom?'<div class="dv-chambre-custom"><input type="text" data-ci="'+i+'" data-cf="customMedineName" value="'+(c.customMedineName||'')+'" placeholder="Nom de l\'hôtel"><input type="text" data-ci="'+i+'" data-cf="customMedineDist" value="'+(c.customMedineDist||'')+'" placeholder="Distance"></div>':'')+
+          (mdCustom?'<div class="dv-chambre-custom"><input type="text" data-ci="'+i+'" data-cf="customMedineName" value="'+(c.customMedineName||'')+'" placeholder="Nom de l\'hôtel"><input type="text" data-ci="'+i+'" data-cf="customMedineDist" value="'+(c.customMedineDist||'')+'" placeholder="Distance"><button type="button" class="dv-btn-save-hotel" data-save-ville="Medine" data-ci="'+i+'" title="Enregistrer cet hôtel pour la prochaine fois">💾</button></div>':'')+
         '</div>'+
       '</div>'+
     '<div class="dv-chambre-type-row">'+
@@ -1252,8 +1258,42 @@ document.getElementById('dv-chambres-list').addEventListener('input',function(e)
 });
 document.getElementById('dv-chambres-list').addEventListener('click',function(e){
   const rm=e.target.getAttribute('data-cremove');
-  if(rm===null)return;
-  dvChambres.splice(Number(rm),1);dvRenderChambresForm();dvRender();
+  if(rm!==null){dvChambres.splice(Number(rm),1);dvRenderChambresForm();dvRender();return;}
+  // Enregistrer hôtel personnalisé → télécharger nouveau fichier HTML
+  const saveVille=e.target.getAttribute('data-save-ville');
+  if(saveVille!==null){
+    const idx=Number(e.target.getAttribute('data-ci'));
+    const c=dvChambres[idx];
+    const nomField=saveVille==='Mekkah'?'customMekkahName':'customMedineName';
+    const distField=saveVille==='Mekkah'?'customMekkahDist':'customMedineDist';
+    const nom=(c[nomField]||'').trim();
+    const dist=(c[distField]||'').trim();
+    if(!nom){alert('Entrez d\'abord le nom de l\'hôtel.');return;}
+    const liste=saveVille==='Mekkah'?DV_HOTELS_MEKKAH:DV_HOTELS_MEDINE;
+    if(liste.find(h=>h.name===nom&&!h.custom)){alert('Cet hôtel existe déjà dans la liste.');return;}
+    // Générer la ligne JS à insérer dans le code source
+    const newEntry='{name:"'+nom.replace(/"/g,'\\"')+'",stars:0,distance:0,dist:"'+dist.replace(/"/g,'\\"')+'",walking:0,transport:"walking",shuttle:false,shuttle24:false}';
+    // Télécharger le fichier HTML mis à jour
+    const btn=e.target;
+    btn.textContent='⏳';
+    fetch(location.href).then(r=>r.text()).then(html=>{
+      // Repère la ligne de l'entrée "Autre / Personnalisé" pour la ville concernée
+      const marker='Autre / Personnalisé';
+      const varName=saveVille==='Mekkah'?'DV_HOTELS_MEKKAH':'DV_HOTELS_MEDINE';
+      // On cherche le dernier {name:"Autre / Personnalisé" dans le bloc de la bonne variable
+      const blockStart=html.indexOf('const '+varName+'=[');
+      const blockEnd=html.indexOf('];',blockStart);
+      const block=html.slice(blockStart,blockEnd);
+      // Insérer avant l'entrée "Autre / Personnalisé"
+      const markerInBlock=block.lastIndexOf('{name:"Autre / Personnalisé"');
+      if(markerInBlock===-1){alert('Impossible de localiser le point d\'insertion.');btn.textContent='💾';return;}
+      const insertPos=blockStart+markerInBlock;
+      const newHtml=html.slice(0,insertPos)+newEntry+',\n  '+html.slice(insertPos);
+      const blob=new Blob([newHtml],{type:'text/html'});
+      const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='safa-omra-updated.html';a.click();
+      btn.textContent='✅';setTimeout(()=>{btn.textContent='💾';},3000);
+    }).catch(()=>{alert('Erreur : impossible de lire le fichier source. Assurez-vous d\'utiliser un serveur web ou GitHub Pages.');btn.textContent='💾';});
+  }
 });
 document.getElementById('dv-btn-add-chambre').addEventListener('click',function(){
  dvChambres.push({type:'Triple',qty:1,places:1,hotelMekkah:'',hotelMedine:'',customMekkahName:'',customMekkahDist:'',customMedineName:'',customMedineDist:''});
@@ -1416,7 +1456,14 @@ document.getElementById('dv-out-chambre').innerHTML = '<div style="display:flex;
   ];
   const detailBox=document.getElementById('dv-out-detail');
   detailBox.style.display='block';
-  detailBox.innerHTML='<h5>Prestations et hébergements inclus</h5><ul class="dv-detail-list">'+lignesDetail.map(l=>'<li>'+l+'</li>').join('')+'</ul>';
+  const liItems=lignesDetail.map((l,i)=>{
+    const hidden=dvExclusions.includes(i);
+    if(hidden)return '';
+    return '<li style="display:flex;align-items:flex-start;gap:6px;"><span style="flex:1;">'+l+'</span><button type="button" onclick="dvExclusions.push('+i+');dvRender();" class="dv-btn-excl no-print" title="Retirer de ce devis" style="flex-shrink:0;background:none;border:none;cursor:pointer;color:#c0392b;font-size:13px;padding:0 2px;line-height:1;">✕</button></li>';
+  }).join('');
+  const hasExcl=dvExclusions.length>0;
+  detailBox.innerHTML='<h5>Prestations et hébergements inclus</h5>'+(hasExcl?'<button type="button" onclick="dvExclusions=[];dvRender();" class="dv-btn-restore-excl no-print" style="font-size:11px;color:var(--emerald);background:none;border:1px solid var(--emerald);border-radius:12px;padding:2px 10px;cursor:pointer;margin-bottom:6px;display:inline-block;">↩ Restaurer tout</button>':'')+
+  '<ul class="dv-detail-list">'+liItems+'</ul>';
   document.getElementById('dv-out-notes').textContent='';
 }
 
@@ -1515,7 +1562,7 @@ function dvApplySnapshot(snap){
   document.getElementById('dv-vol-autre-wrap').style.display=document.getElementById('dv-vol-depart').value==='Autre'?'block':'none';
   document.getElementById('dv-vol-compagnie-autre-wrap').style.display=document.getElementById('dv-vol-compagnie').value==='Autre'?'block':'none';
   dvChambres=(snap.chambres&&snap.chambres.length)?JSON.parse(JSON.stringify(snap.chambres)):[{type:'Quadruple',qty:1,places:1,hotelMekkah:'',hotelMedine:'',customMekkahName:'',customMekkahDist:'',customMedineName:'',customMedineDist:''}];
-  dvSupplements=snap.supplements?JSON.parse(JSON.stringify(snap.supplements)):[];
+  dvSupplements=snap.supplements?JSON.parse(JSON.stringify(snap.supplements)):[];dvExclusions=[];
   dvCurrentSavedId=snap.id;
   dvRenderChambresForm();
   dvRenderSuppForm();
@@ -1641,7 +1688,7 @@ document.getElementById('dv-btn-reset').addEventListener('click',()=>{
   document.getElementById('dv-vol-depart-wrap').style.display='block';
   dvChambres=[{type:'Quadruple',qty:1,hotelMekkah:'',hotelMedine:'',customMekkahName:'',customMekkahDist:'',customMedineName:'',customMedineDist:''}];
   dvRenderChambresForm();
-  dvSupplements=[];dvRenderSuppForm();
+  dvSupplements=[];dvRenderSuppForm();dvExclusions=[];
   document.getElementById('dv-ref').value=dvRandRef();document.getElementById('dv-date').value=dvToday();
   dvAppliquerTarifs();dvRender();
 });
@@ -1795,7 +1842,7 @@ function dvOuvrirModalConfirmation() {
   document.getElementById('conf-recap-total').textContent   = totalTxt;
   document.getElementById('conf-recap-label').textContent   = voyStr;
 
-  const badgeClass = formule === 'Confort' ? 'confort' : formule === 'Éco' ? 'eco' : 'perso';
+  const badgeClass = formule === 'Confort' ? 'confort' : formule === 'Éco' ? 'eco' : formule === 'Rapport qualité prix' ? 'rqp' : 'perso';
   document.getElementById('conf-info-formule').innerHTML =
     '<span class="conf-badge ' + badgeClass + '">Formule ' + formule + '</span>';
 
